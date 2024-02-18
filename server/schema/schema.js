@@ -20,10 +20,12 @@ const ClientType = new GraphQLObjectType({
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
-    client: { type: ClientType },
-    args: { id: { type: GraphQLID } },
-    resolver(parent, args) {
-      return clients.find((_client) => _client.id === args.id);
+    client: {
+      type: ClientType,
+      args: { id: { type: GraphQLID } },
+      resolve(parent, args) {
+        return clients.find((_client) => _client.id === args.id);
+      },
     },
   },
 });
